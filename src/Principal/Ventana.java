@@ -4,12 +4,16 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
@@ -24,7 +28,10 @@ public class Ventana extends JFrame implements ActionListener{
      JPanel pS = new JPanel();
      JPanel pC = new JPanel();
 
-     JButton boton = new JButton("Limpiar");
+     ButtonGroup grupo=new ButtonGroup();
+     JRadioButton img1 = new JRadioButton("Meme 1");
+     JRadioButton img2 = new JRadioButton("Meme 2");
+     JRadioButton img3 = new JRadioButton("Meme 3");
      
      Lienzo lienzo = new Lienzo();
      
@@ -56,42 +63,115 @@ public class Ventana extends JFrame implements ActionListener{
         
         
 
-        boton.setActionCommand("Limpiar");
-        pS.add(boton);
+        
+        
+        
+        
+        img1.setSelected(true);
+        img1.setMnemonic(KeyEvent.VK_B);
+        img1.setActionCommand("IMG1");
+            grupo.add(img1);
+            pS.add(img1);       
+        img2.setMnemonic(KeyEvent.VK_B);
+        img2.setActionCommand("IMG2");
+            grupo.add(img2);
+            pS.add(img2);     
+        img3.setMnemonic(KeyEvent.VK_B);
+        img3.setActionCommand("IMG3");
+            grupo.add(img3);
+            pS.add(img3);
+            
+            
         getContentPane().add(pS,BorderLayout.SOUTH);
-        boton.addActionListener(this);
+        img1.addActionListener(this);
+        img2.addActionListener(this);
+        img3.addActionListener(this);
         //
     
  
         lienzo.addMouseMotionListener(new MouseMotionAdapter(){
              @Override
             public void mouseMoved(MouseEvent evento){
-             // JLabel.setText(String.format("Sus coordenadas son [%d, %d]",
-                   //getX y getY devuelve valores de las coordenadas del puntero.
-                      evento.getX();
-                      evento.getY();
-                      lienzo.dibujaPunto(evento.getPoint());
+//                      evento.getX();
+//                      evento.getY();
+
+                     // lienzo.dibujaPunto(evento.getPoint());
                       
              }
+            
+
+            
+          });
+        
+        lienzo.addMouseListener(new MouseListener(){
+
+            
+            @Override
+            //Se llama cuando se oprime y se suelta un botón en el mouse.
+            public void mouseClicked(MouseEvent evento) {
+                lienzo.escribirTexto(evento.getPoint());
+                  
+            }
+            
+            
+            @Override
+             //Ocurre cuando el cursor entra dentro de los límites del componente.
+            public  void mouseEntered(MouseEvent evento){
+                
+            }
+
+                
+
+ 
+            @Override
+            //Ocurre cuando el cursor sale dentro de los límites del componente.
+            public  void mouseExited(MouseEvent evento){
+                    
+                }
+            
+            @Override
+            //es llamado cuando se oprime un botón en el Mouse
+            public void mousePressed(MouseEvent evento) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            // Ocurre cuando se suelta un botón en el Mouse.
+            public void mouseReleased(MouseEvent evento) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+            
           });
           
     }
 
+    
+    
+    
+    
+    
+    
+    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-       
+       grupo.clearSelection();
       // String botonElegido = e.getSource();     
        String comando = e.getActionCommand();
-        if (comando.equals("Limpiar")){
-       // if(e.getSource() == boton){     
-            //contenido = campo.getText();
-           // mostrarDatos.setText(contenido);
-          //  int factorialNumero = factorial.obtenerFactorial(Integer.parseInt(contenido));
-           // mostrarDatos.setText(Integer.toString(factorialNumero));
-      
-        }
+        if (comando.equals("IMG1")){
+            img1.setSelected(true);
+         }
+        if (comando.equals("IMG2")){
+            img2.setSelected(true);
+
+         }
+        if (comando.equals("IMG3")){
+            img3.setSelected(true);
+
+         }
         
-       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
     }
     
 }
+//Panel transparente y JtexFil para redimensionar el tamaño //setOpcaque false

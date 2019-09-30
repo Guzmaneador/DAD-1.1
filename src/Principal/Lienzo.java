@@ -48,5 +48,12 @@ public class Lienzo extends Canvas{
      g.fillOval(p.x-4, p.y-4, 8, 8);
      g.dispose();
     }
+    void escribirTexto(Point p){
+     //   char[] chars ={a,b};
+     Graphics g=getGraphics();
+     g.setColor(Color.red);
+     //g.drawChars(chars, p.x, p.y, WIDTH, WIDTH);
+     g.dispose();
+    }
     
 }
