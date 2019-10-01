@@ -2,9 +2,11 @@ package Principal;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionAdapter;
@@ -37,6 +39,8 @@ public class Ventana extends JFrame implements ActionListener{
      
      String contenido="";
      
+      Point cordenadas ;
+     
     public Ventana(){
         this.ancho=640;
         this.alto =480;
@@ -50,7 +54,7 @@ public class Ventana extends JFrame implements ActionListener{
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //
-        
+       
         //contendor.setLayout();
         getContentPane().setLayout(new BorderLayout());
         
@@ -97,32 +101,25 @@ public class Ventana extends JFrame implements ActionListener{
 
                      // lienzo.dibujaPunto(evento.getPoint());
                       
-             }
-            
-
-            
+             }                        
           });
-        
+        //------------------------------------------------------------//
         lienzo.addMouseListener(new MouseListener(){
-
+            String Texto;
             
             @Override
             //Se llama cuando se oprime y se suelta un botón en el mouse.
             public void mouseClicked(MouseEvent evento) {
-                lienzo.escribirTexto(evento.getPoint());
+                //registramos las cordenadas al hacer click para usarlas mas adelnate 
+                cordenadas = evento.getPoint();
+                //lienzo.escribirTexto(evento.getPoint());
                   
-            }
-            
-            
+            }                       
             @Override
              //Ocurre cuando el cursor entra dentro de los límites del componente.
             public  void mouseEntered(MouseEvent evento){
                 
             }
-
-                
-
- 
             @Override
             //Ocurre cuando el cursor sale dentro de los límites del componente.
             public  void mouseExited(MouseEvent evento){
@@ -132,18 +129,38 @@ public class Ventana extends JFrame implements ActionListener{
             @Override
             //es llamado cuando se oprime un botón en el Mouse
             public void mousePressed(MouseEvent evento) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
 
             @Override
             // Ocurre cuando se suelta un botón en el Mouse.
             public void mouseReleased(MouseEvent evento) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-            
+                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }           
           });
+        
+         ///--------------------------------------------///  
+        lienzo.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                 e.getSource();
+                 e.getKeyText(e.getKeyCode());
+                 lienzo.escribirTexto(cordenadas, e.getKeyText(e.getKeyCode()));
+            }
+
+            @Override
+            /**Este metodo se ejecuta cuando se presiona una tecla*/
+            public void keyPressed(KeyEvent e) {
+            }
+
+            @Override
+            /**Este metodo se ejecuta cuando se suelta una tecla*/
+            public void keyReleased(KeyEvent e) {
+            }
+      });
           
     }
+ 
 
     
     
