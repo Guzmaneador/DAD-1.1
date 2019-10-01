@@ -37,7 +37,7 @@ public class Ventana extends JFrame implements ActionListener{
      
      Lienzo lienzo = new Lienzo();
      
-     String contenido="";
+     String escribir ="";
      
       Point cordenadas ;
      
@@ -112,6 +112,7 @@ public class Ventana extends JFrame implements ActionListener{
             public void mouseClicked(MouseEvent evento) {
                 //registramos las cordenadas al hacer click para usarlas mas adelnate 
                 cordenadas = evento.getPoint();
+                escribir ="";
                 //lienzo.escribirTexto(evento.getPoint());
                   
             }                       
@@ -143,9 +144,10 @@ public class Ventana extends JFrame implements ActionListener{
         lienzo.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                 e.getSource();
-                 e.getKeyText(e.getKeyCode());
-                 lienzo.escribirTexto(cordenadas, e.getKeyText(e.getKeyCode()));
+               
+                 char letra= e.getKeyChar();
+                 escribir += Character.toString(letra);
+                 lienzo.escribirTexto(cordenadas, escribir );
             }
 
             @Override

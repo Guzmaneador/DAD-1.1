@@ -24,6 +24,7 @@ public class Lienzo extends Canvas{
     public Lienzo(){
         
     }
+    ////METODOS DE CANVAS
     @Override
     public Dimension getPreferredSize(){return new Dimension(640, 480);}
     
@@ -36,12 +37,15 @@ public class Lienzo extends Canvas{
         //BufferedImage
         
     }
-    
+    @Override
+    public void repaint(){
+        
+    }
     @Override
     public void update (Graphics g){
           
     }
-    
+    ////////////////////////////////
     void dibujaPunto(Point p){
      Graphics g=getGraphics();
      g.setColor(Color.red);
